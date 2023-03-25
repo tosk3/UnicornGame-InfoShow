@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float health;
     [SerializeField] private float attackDamage;
+    [SerializeField] private float secondsToDie;
 
     [SerializeField] private EnemyBaseState currentState;
  
@@ -52,7 +54,7 @@ public class Enemy : MonoBehaviour
         playerTarget.GetComponent<PlayerController>().TakeDamage(attackDamage);
     }
 
-    internal float GetHealth()
+    public float GetHealth()
     {
         return health;
     }
@@ -64,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
-        this.gameObject.SetActive(false);
+        StartCoroutine(Coroutine_Death());
     }
     public float GetDistanceToPlayer()
     {
@@ -81,5 +83,15 @@ public class Enemy : MonoBehaviour
         {
             this.playerTarget = playerTarget;
         }
+    }
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+    }
+
+    private IEnumerator Coroutine_Death()
+    {
+        yield return new WaitForSeconds(secondsToDie);
+        Destroy(gameObject);
     }
 }

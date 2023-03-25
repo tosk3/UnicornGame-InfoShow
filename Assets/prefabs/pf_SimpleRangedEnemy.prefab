@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 862644367714359844}
   - component: {fileID: 862644367714359867}
   - component: {fileID: 862644367714359866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EnemyModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 862644367959708912}
   - component: {fileID: 862644367959708919}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pf_SimpleRangedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
