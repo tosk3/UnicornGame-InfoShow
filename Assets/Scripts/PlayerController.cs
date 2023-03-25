@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private float health;
     [SerializeField] private Ray cameraRay;                // The ray that is cast from the camera to the mouse position
     [SerializeField] private RaycastHit cameraRayHit;    // The object that the ray hits
     [SerializeField] private Vector3 right;
@@ -41,5 +43,10 @@ public class PlayerController : MonoBehaviour
         transform.position += rightMovement2;
         transform.position += upMovement2;
 
+    }
+
+    public void TakeDamage(float attackDamage)
+    {
+        health -=attackDamage;
     }
 }
