@@ -5,8 +5,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public event EventHandler<OnDeathArgs> OnEnemyDeath;
+    public class OnDeathArgs : EventArgs
+    {
+        public Vector3 position;
+    }
     [SerializeField] private Transform playerTarget;
     [SerializeField] private float distaceToPlayer;
+    [SerializeField] private Rigidbody rb;
 
     [SerializeField] private float speed;
     [SerializeField] private float health;
@@ -14,6 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float attackTimer;
     [SerializeField] private float timerMax;
     [SerializeField] private float secondsToDie;
+    [SerializeField] private MagicMissleGun gun;
 
     [SerializeField] private EnemyBaseState currentState;
  
@@ -44,7 +51,6 @@ public class Enemy : MonoBehaviour
                 return;
             }
         }   
-        //currentState = currentState.Transitions[currentState.Transitions.IndexOf(item => item.StateType == state)];
     }
 
     public Transform GetTarget()
@@ -62,7 +68,15 @@ public class Enemy : MonoBehaviour
     {
         if (RunTimer())
         {
-            playerTarget.GetComponent<PlayerController>().TakeDamage(attackDamage);
+            if(gun != null)
+            {
+                gun.Shoot(playerTarget.position);
+            }
+            else
+            {
+                playerTarget.GetComponentInParent<PlayerController>().TakeDamage(attackDamage); 
+            }
+           
         }
     }
     private bool RunTimer()
@@ -100,6 +114,8 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
+        rb.isKinematic = false;
+        OnEnemyDeath?.Invoke(this, new OnDeathArgs() { position = this.transform.position });
         StartCoroutine(Coroutine_Death());
     }
     private IEnumerator Coroutine_Death()

@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform playerTarget;
     [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private List<Enemy> fairies;
     [SerializeField] private List<Enemy> enemiesOnScreen;
     [SerializeField] private float spawnTimer;
     [SerializeField] private float maxSpawnTimer;
@@ -35,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
 
         Vector3 randomPos = Random.insideUnitSphere * spawnRadius;
         randomPos += playerTarget.position;
-        randomPos.y = 1f;
+        randomPos.y = 0.2f;
 
         Vector3 direction = randomPos - playerTarget.position;
         direction.Normalize();
@@ -58,5 +59,14 @@ public class EnemySpawner : MonoBehaviour
     private GameObject PickRandomPrefab()
     {
         return enemyPrefabs[UnityEngine.Random.Range(0,enemyPrefabs.Count)];
+    }
+
+    public List<Enemy> GetEnemiesOnScreen()
+    {
+        return enemiesOnScreen;
+    }
+    public List<Enemy> GetFairies()
+    {
+        return fairies;
     }
 }

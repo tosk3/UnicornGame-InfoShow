@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyProjectile : MonoBehaviour
 {
-    public class Bullet : MonoBehaviour
-    {
         [SerializeField] private float secondsToDie;
         [SerializeField] private float damageAmount;
         [SerializeField] private LayerMask layerMask;
@@ -24,5 +22,4 @@ public class EnemyProjectile : MonoBehaviour
             yield return new WaitForSeconds(secondsToDie);
             Destroy(gameObject);
         }
-    }
 }

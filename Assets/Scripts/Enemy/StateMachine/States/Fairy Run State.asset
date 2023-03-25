@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b47d8251da38ae643b6d94538dd3526e, type: 2}
   - {fileID: 11400000, guid: 7762c10264054654e9eca29624c4e4ad, type: 2}
   - {fileID: 11400000, guid: b3f55fedcb34a07419d4d2690ff70a60, type: 2}
-  minMaxRunDistance: {x: 25, y: 30}
+  minMaxRunDistance: {x: 25, y: 40}

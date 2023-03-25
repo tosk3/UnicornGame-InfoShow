@@ -16,4 +16,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7762c10264054654e9eca29624c4e4ad, type: 2}
   - {fileID: 11400000, guid: b47d8251da38ae643b6d94538dd3526e, type: 2}
   - {fileID: 11400000, guid: 36c8c1826451c1c48bd5b74bef19a290, type: 2}
-  minMaxDistance: {x: 15, y: 25}
+  minMaxDistance: {x: 25, y: 40}

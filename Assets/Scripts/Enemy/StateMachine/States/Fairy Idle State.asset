@@ -16,5 +16,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 36c8c1826451c1c48bd5b74bef19a290, type: 2}
   - {fileID: 11400000, guid: b3f55fedcb34a07419d4d2690ff70a60, type: 2}
   - {fileID: 11400000, guid: d42ad1cde7304d04e96437d9f2d972e9, type: 2}
-  idleDistance: 30
+  idleDistance: 40
   defaultOutOfIdleState: 5

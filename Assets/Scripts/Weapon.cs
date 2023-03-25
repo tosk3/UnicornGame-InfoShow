@@ -28,7 +28,11 @@ public class Weapon : MonoBehaviour
         {
             Vector3 randomOffset = new Vector3(UnityEngine.Random.Range(0, offsetValue), UnityEngine.Random.Range(0, offsetValue), UnityEngine.Random.Range(0, offsetValue));
             GameObject bulletpf = Instantiate(bullet, this.transform.position+randomOffset, transform.parent.rotation); 
-            bulletpf.GetComponent<Rigidbody>().AddForce((shootDir + shootDir/5) * (shootingForce + UnityEngine.Random.Range(0,shootForceVariation)), ForceMode.Impulse);
+            bulletpf.GetComponent<Rigidbody>().AddForce(( shootDir +
+                new Vector3(UnityEngine.Random.Range(0, shootDir.x),
+                UnityEngine.Random.Range(0, shootDir.y),
+                UnityEngine.Random.Range(0, shootDir.z))) 
+                * (shootingForce + UnityEngine.Random.Range(0,shootForceVariation)), ForceMode.Impulse);
         }
     }
 }
