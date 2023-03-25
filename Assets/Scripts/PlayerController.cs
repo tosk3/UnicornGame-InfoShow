@@ -11,11 +11,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RaycastHit cameraRayHit;    // The object that the ray hits
     [SerializeField] private Vector3 right;
     [SerializeField] private Vector3 forward;
+    [SerializeField] private Vector3 targetPosition;
+    [SerializeField] private Weapon weapon;
 
     private void Update()
     {
         LookAtCamera();
         Move();
+        weapon.CheckInput(targetPosition);
     }
     private void LookAtCamera()
     {
@@ -25,7 +28,7 @@ public class PlayerController : MonoBehaviour
         {       
             if (cameraRayHit.transform.tag == "Ground")
             {      
-                Vector3 targetPosition = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
+                targetPosition = new Vector3(cameraRayHit.point.x, transform.position.y, cameraRayHit.point.z);
                 transform.LookAt(targetPosition);
             }
         }

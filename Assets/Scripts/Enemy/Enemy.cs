@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 
@@ -72,5 +73,13 @@ public class Enemy : MonoBehaviour
     public void CalculateDistanceToPlayer()
     {
         distaceToPlayer = Vector3.Distance(transform.position, GetTarget().position);
+    }
+
+    public void SetTarget(Transform playerTarget)
+    {
+        if(this.playerTarget == null)
+        {
+            this.playerTarget = playerTarget;
+        }
     }
 }
