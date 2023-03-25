@@ -36,7 +36,6 @@ public class EnemyIdleState : EnemyBaseState
         }
         if(currentDistace <= idleDistance)
         {
-            Debug.Log("less idle");
             state = defaultOutOfIdleState;
             return true;
         }

@@ -144,7 +144,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
   distaceToPlayer: 0
-  speed: 2
+  speed: 3
   health: 10
   attackDamage: 1
+  attackTimer: 3
+  timerMax: 3
+  secondsToDie: 2
   currentState: {fileID: 11400000, guid: 7ed12457ddfdcfe47a6ded342cb87aa1, type: 2}

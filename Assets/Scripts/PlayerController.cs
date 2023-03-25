@@ -5,10 +5,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public event EventHandler<OnShootEventArgs> OnShoot;
+    public class OnShootEventArgs : EventArgs
+    {
+        public Vector3 position;
+    }
+
     [SerializeField] private float speed;
     [SerializeField] private float health;
-    [SerializeField] private Ray cameraRay;                // The ray that is cast from the camera to the mouse position
-    [SerializeField] private RaycastHit cameraRayHit;    // The object that the ray hits
+    [SerializeField] private Ray cameraRay;               
+    [SerializeField] private RaycastHit cameraRayHit; 
     [SerializeField] private Vector3 right;
     [SerializeField] private Vector3 forward;
     [SerializeField] private Vector3 targetPosition;
@@ -18,7 +24,10 @@ public class PlayerController : MonoBehaviour
     {
         LookAtCamera();
         Move();
-        weapon.CheckInput(targetPosition);
+        if (weapon.CheckInput(targetPosition))
+        {
+            OnShoot?.Invoke(this, new OnShootEventArgs() { position = this.transform.position }) ;
+        }
     }
     private void LookAtCamera()
     {

@@ -1,18 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRunState : MonoBehaviour
+[CreateAssetMenu(menuName = "enemy/ai/state/run")]
+public class EnemyRunState : EnemyBaseState
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Vector2 minMaxRunDistance;
+    public override EnemyState StateType
     {
-        
+        get { return EnemyState.run; }
+    }
+    public override bool CheckRules(Enemy enemy)
+    {
+        float currentDistace = enemy.GetDistanceToPlayer();
+
+        if (currentDistace >= minMaxRunDistance.x)
+        {
+            return true;
+        }
+        return false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExecuteState(Enemy enemy)
     {
-        
+        enemy.MoveToTarget(-1f);
+    }
+
+    public override bool ExitState(Enemy enemy, out EnemyState state)
+    {
+        float currentDistace = enemy.GetDistanceToPlayer();
+
+        if (enemy.GetHealth() <= 0)
+        {
+            state = EnemyState.die;
+            return true;
+        }
+  
+        if(currentDistace >= minMaxRunDistance.y)
+        {
+            state = EnemyState.idle;
+            return true;
+        }
+        if (currentDistace <= minMaxRunDistance.y)
+        {
+            state = EnemyState.chase;
+            return true;
+        }
+
+        state = EnemyState.run;
+        return false;
     }
 }

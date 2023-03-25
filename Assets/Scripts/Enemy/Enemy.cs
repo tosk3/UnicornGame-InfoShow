@@ -11,6 +11,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float health;
     [SerializeField] private float attackDamage;
+    [SerializeField] private float attackTimer;
+    [SerializeField] private float timerMax;
     [SerializeField] private float secondsToDie;
 
     [SerializeField] private EnemyBaseState currentState;
@@ -19,7 +21,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CalculateDistanceToPlayer();
+        CalculateDistanceToPlayer();     
         if (currentState.ExitState(this, out EnemyState state))
         {
             ChangeState(state);
@@ -49,25 +51,36 @@ public class Enemy : MonoBehaviour
     {
         return playerTarget;
     }
+    public void SetTarget(Transform playerTarget)
+    {
+        if (this.playerTarget == null)
+        {
+            this.playerTarget = playerTarget;
+        }
+    }
     public void AttackTarget()
     {
-        playerTarget.GetComponent<PlayerController>().TakeDamage(attackDamage);
+        if (RunTimer())
+        {
+            playerTarget.GetComponent<PlayerController>().TakeDamage(attackDamage);
+        }
+    }
+    private bool RunTimer()
+    {
+        attackTimer -= Time.deltaTime;
+        if (attackTimer <= 0)
+        {
+            attackTimer = timerMax;
+            return true;
+        }
+        return false;
     }
 
-    public float GetHealth()
+    public void MoveToTarget(float direction)
     {
-        return health;
-    }
-
-    public void MoveToTarget()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, playerTarget.position, speed * Time.deltaTime);
-    }
-
-    public void Die()
-    {
-        StartCoroutine(Coroutine_Death());
-    }
+        transform.position = Vector3.MoveTowards(transform.position, playerTarget.position, direction * speed * Time.deltaTime);
+        transform.rotation = Quaternion.LookRotation((transform.position - playerTarget.position).normalized);
+    } 
     public float GetDistanceToPlayer()
     {
         return distaceToPlayer;
@@ -77,18 +90,18 @@ public class Enemy : MonoBehaviour
         distaceToPlayer = Vector3.Distance(transform.position, GetTarget().position);
     }
 
-    public void SetTarget(Transform playerTarget)
+    public float GetHealth()
     {
-        if(this.playerTarget == null)
-        {
-            this.playerTarget = playerTarget;
-        }
+        return health;
     }
     public void TakeDamage(float amount)
     {
         health -= amount;
     }
-
+    public void Die()
+    {
+        StartCoroutine(Coroutine_Death());
+    }
     private IEnumerator Coroutine_Death()
     {
         yield return new WaitForSeconds(secondsToDie);

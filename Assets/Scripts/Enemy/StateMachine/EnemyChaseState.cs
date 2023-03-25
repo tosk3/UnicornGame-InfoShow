@@ -20,7 +20,7 @@ public class EnemyChaseState : EnemyBaseState
 
     public override void ExecuteState(Enemy enemy)
     {
-        enemy.MoveToTarget();
+        enemy.MoveToTarget(1f);
     }
 
     public override bool ExitState(Enemy enemy, out EnemyState state)

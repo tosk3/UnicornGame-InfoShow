@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 862644367959708912}
   - component: {fileID: 862644367959708919}
   m_Layer: 7
-  m_Name: pf_SimpleEnemy
+  m_Name: pf_FairyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -145,9 +145,9 @@ MonoBehaviour:
   playerTarget: {fileID: 0}
   distaceToPlayer: 0
   speed: 4
-  health: 10
-  attackDamage: 1
-  attackTimer: 2
+  health: 120
+  attackDamage: 3
+  attackTimer: 3
   timerMax: 3
   secondsToDie: 2
-  currentState: {fileID: 11400000, guid: 8784f2545d15e434884441fb2e030926, type: 2}
+  currentState: {fileID: 11400000, guid: b47d8251da38ae643b6d94538dd3526e, type: 2}

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f652121aed2a07d4bb0910600a7897f2, type: 3}
-  m_Name: Simple RangedEnemy Chase State
+  m_Name: Fairy Chase State
   m_EditorClassIdentifier: 
   transitions:
+  - {fileID: 11400000, guid: 7762c10264054654e9eca29624c4e4ad, type: 2}
+  - {fileID: 11400000, guid: b47d8251da38ae643b6d94538dd3526e, type: 2}
   - {fileID: 11400000, guid: 36c8c1826451c1c48bd5b74bef19a290, type: 2}
-  - {fileID: 11400000, guid: b776a4432c97bcd47bd2dd3454a96436, type: 2}
-  - {fileID: 11400000, guid: 7ed12457ddfdcfe47a6ded342cb87aa1, type: 2}
-  minMaxDistance: {x: 15, y: 30}
+  minMaxDistance: {x: 15, y: 25}
