@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private List<string> speachLines;
     public event EventHandler<OnShootEventArgs> OnShoot;
     public class OnShootEventArgs : EventArgs
     {
@@ -24,8 +25,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector3 targetPosition;
     [SerializeField] private Weapon weapon;
     [SerializeField] private float shootTimer;
+    [SerializeField] private float speachTimer;
+    [SerializeField] private float bubbleTimer;
     [SerializeField] private float shootTimerMax;
+    [SerializeField] private float speachTimerMax;
+    [SerializeField] private float bubbleTimerMax;
     [SerializeField] private bool readyToShoot= false;
+    [SerializeField] private bool readyToSpeak= false;
+    [SerializeField] private TextMesh textObj;
+    [SerializeField] private Vector3 localOffset = new Vector3(-5f, 10f, 0);
+
+
 
     private void Update()
     {
@@ -37,6 +47,24 @@ public class PlayerController : MonoBehaviour
             {
                 OnShoot?.Invoke(this, new OnShootEventArgs() { position = this.transform.position });
                 readyToShoot = false;
+            }
+        }
+        if (RunSpeachTimer())
+        {
+            textObj = LevelManager.CreateWorldText(speachLines[UnityEngine.Random.Range(0, speachLines.Count)], this.transform.parent, localOffset, 12,Color.black);
+            readyToSpeak = false;
+        }
+        if (textObj != null)
+        {
+
+            textObj.transform.position = this.transform.position + localOffset;
+            textObj.transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
+            Camera.main.transform.rotation * Vector3.up);
+
+            if (RunBubbleTimer())
+            {
+                Destroy(textObj);
+                textObj = null;
             }
         }
     }
@@ -85,5 +113,32 @@ public class PlayerController : MonoBehaviour
         }
         return false;
         
+    }
+    private bool RunSpeachTimer()
+    {
+        if (!readyToSpeak)
+        {
+            speachTimer -= Time.deltaTime;
+            if (speachTimer <= 0)
+            {
+                speachTimer = speachTimerMax;
+                readyToSpeak = true;
+                return true;
+            }
+            return false;
+        }
+        return false;
+
+    }
+    private bool RunBubbleTimer()
+    {
+            bubbleTimer -= Time.deltaTime;
+            if (bubbleTimer <= 0)
+            {
+                bubbleTimer = bubbleTimerMax;
+                return true;
+            }
+            return false;
+
     }
 }
