@@ -70824,6 +70824,32 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1734796348}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1737510929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 351728502162741550, guid: 8a4f5a469d0036d49bf371725b43bf93,
+    type: 3}
+  m_PrefabInstance: {fileID: 7336428761571155703}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1737510932
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737510929}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 059c901de3e687441af5cb15f94a56c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &1738612281
 GameObject:
   m_ObjectHideFlags: 0
@@ -89325,6 +89351,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
         type: 3}
+      propertyPath: spawnTimer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
+        type: 3}
       propertyPath: spawnRadius
       value: 40
       objectReference: {fileID: 0}
@@ -89333,6 +89364,11 @@ PrefabInstance:
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1183129711}
+    - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
+        type: 3}
+      propertyPath: maxSpawnTimer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
         type: 3}
       propertyPath: fairies.Array.data[0]
@@ -89416,6 +89452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: playerObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 7336428762620067463, guid: 8a4f5a469d0036d49bf371725b43bf93,
+        type: 3}
+      propertyPath: speed
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a4f5a469d0036d49bf371725b43bf93, type: 3}

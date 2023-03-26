@@ -52,8 +52,8 @@ MonoBehaviour:
   speed: 4
   health: 10
   attackDamage: 1
-  attackTimer: 2
-  timerMax: 3
+  attackTimer: 1
+  timerMax: 1
   secondsToDie: 2
   gun: {fileID: 5705524628665739540}
   currentState: {fileID: 11400000, guid: 8784f2545d15e434884441fb2e030926, type: 2}
