@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   enemiesOnScreen: []
-  spawnTimer: 3
-  maxSpawnTimer: 3
-  spawnRadius: 30
+  spawnTimer: 2
+  maxSpawnTimer: 2
+  spawnRadius: 40
   play: 1

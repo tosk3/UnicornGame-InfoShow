@@ -89351,24 +89351,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
         type: 3}
-      propertyPath: spawnTimer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
-        type: 3}
-      propertyPath: spawnRadius
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
-        type: 3}
       propertyPath: playerTarget
       value: 
       objectReference: {fileID: 1183129711}
-    - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
-        type: 3}
-      propertyPath: maxSpawnTimer
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4290293806564186837, guid: a3499cb8a9969f44ea3cc189226db5bd,
         type: 3}
       propertyPath: fairies.Array.data[0]

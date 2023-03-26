@@ -64,6 +64,7 @@ MonoBehaviour:
   readyToSpeak: 0
   textObj: {fileID: 0}
   localOffset: {x: -5, y: 10, z: 0}
+  animator: {fileID: 7833196995756143796}
   speachLines:
   - Sparkles, please!
   - Sparkles, be reasonable!
@@ -323,6 +324,26 @@ CapsuleCollider:
   m_Height: 4.41
   m_Direction: 1
   m_Center: {x: 0, y: 1.65, z: 0}
+--- !u!95 &7833196995756143796
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020190582295037815}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 97a70e5adef55574ba0c66847e147c75, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &7649199655658282445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 56a70a3d2fcb108498cea54cfbd103e2,

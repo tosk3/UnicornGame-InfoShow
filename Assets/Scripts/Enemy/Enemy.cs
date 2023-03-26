@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool readyToSpeak = false;
     [SerializeField] private TextMesh textObj;
     [SerializeField] private Vector3 localOffset = new Vector3(-5f, 10f, 0);
+    [SerializeField] private Animator animator;
+
     [SerializeField] private List<string> speachLines = new List<string> 
     {
         "Sparkles, please!",
@@ -194,6 +196,7 @@ public class Enemy : MonoBehaviour
         {
             Destroy(textObj);
             textObj = null;
+            animator.enabled = false;
             rb.isKinematic = false;
             OnEnemyDeath?.Invoke(this, new OnDeathArgs() { position = this.transform.position });
             StartCoroutine(Coroutine_Death());
