@@ -154,10 +154,12 @@ MonoBehaviour:
   reloadClip: {fileID: 8300000, guid: 07baff6bc46deff42bbcd9511176c8d5, type: 3}
   killedFairies: 0
   killedEnemies: 0
-  levelTimer: 300
-  levelTimerMax: 300
+  levelTimer: 150
+  levelTimerMax: 150
   score: 0
   endScreen: {fileID: 0}
   endScreen_text: {fileID: 0}
   fairyCounter: {fileID: 0}
   playerHealth_UI: {fileID: 0}
+  fairyLocator: {fileID: 0}
+  fairyLocator2: {fileID: 0}

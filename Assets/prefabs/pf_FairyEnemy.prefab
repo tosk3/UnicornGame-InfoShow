@@ -50,10 +50,17 @@ MonoBehaviour:
   distaceToPlayer: 0
   rb: {fileID: 8263378594786717810}
   speed: 4
+<<<<<<< HEAD
   health: 80
   attackDamage: 5
   attackTimer: 1
   timerMax: 1
+=======
+  health: 100
+  attackDamage: 3
+  attackTimer: 3
+  timerMax: 3
+>>>>>>> 0a6aa87 (koreguoju level)
   secondsToDie: 2
   gun: {fileID: 2848324021427891227}
   currentState: {fileID: 11400000, guid: b47d8251da38ae643b6d94538dd3526e, type: 2}
