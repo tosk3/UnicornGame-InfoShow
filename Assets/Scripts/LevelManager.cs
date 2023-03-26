@@ -19,7 +19,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float levelTimerMax;
     [SerializeField] private float score;
     [SerializeField] private GameObject endScreen;
+    [SerializeField] private GameObject endScreenFail;
     [SerializeField] private TextMeshProUGUI endScreen_text;
+    [SerializeField] private TextMeshProUGUI endScreenfail_text;
 
     //UI
     [SerializeField] private FairyCounter fairyCounter;
@@ -38,8 +40,8 @@ public class LevelManager : MonoBehaviour
 
     public void GameOver()
     {
-        endScreen.SetActive(true);
-        endScreen_text.text = "score : " + score.ToString();
+        //endScreen.SetActive(true);
+        //endScreen_text.text = "score : " + score.ToString();
         playerController.EndGame();
         spawner.EndGame();
     }
@@ -61,7 +63,9 @@ public class LevelManager : MonoBehaviour
         playerHealth_UI.UpdateHealth(playerController.GetHealthPrecent());
         if ( e.ded)
         {
-            score = killedFairies * 200 + killedEnemies * 20 + levelTimerMax * 50;
+            score = killedFairies * 200 + killedEnemies * 20 + levelTimerMax * 20;
+            endScreenFail.SetActive(true);
+            endScreenfail_text.text = "score : " + score.ToString();
             GameOver();
         }
     }
@@ -71,7 +75,9 @@ public class LevelManager : MonoBehaviour
         if (RunLevelTimer())
         {
             //game Over score rampage over
-            score = killedFairies * 200 + killedEnemies * 20 + levelTimerMax * 50;
+            score = killedFairies * 200 + killedEnemies * 20 + levelTimerMax * 20;
+            endScreenFail.SetActive(true);
+            endScreenfail_text.text = "score : " + score.ToString();
             GameOver();
         }
 
@@ -115,6 +121,8 @@ public class LevelManager : MonoBehaviour
         if (killedFairies >= spawner.GetFairies().Count)
         {
             score = killedFairies * 200 + killedEnemies * 20 + (levelTimer + levelTimerMax) * 50;
+            endScreen.SetActive(true);
+            endScreen_text.text = "score : " + score.ToString();
             GameOver();
         }
     }
@@ -126,8 +134,11 @@ public class LevelManager : MonoBehaviour
         audioSource.PlayOneShot(clip);
         killedFairies++;
         //fairyLocator.Show(spawner.GetFairies()[(int)killedFairies].transform.position);
-        fairyLocator2.SetTarget(spawner.GetFairies()[(int)killedFairies].gameObject);
-        fairyCounter.SwapIcons();
+        if(killedFairies <= spawner.GetFairies().Count)
+        {
+            fairyLocator2.SetTarget(spawner.GetFairies()[(int)killedFairies].gameObject);
+            fairyCounter.SwapIcons();
+        }        
         CheckForAllKilledFairies();
     }
 
