@@ -1,9 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public event EventHandler<OnSpawnArgs> OnSpawn;
+    public class OnSpawnArgs : EventArgs
+    {
+       public Enemy enemySpawned;
+    }
+
     [SerializeField] private Transform playerTarget;
     [SerializeField] private List<GameObject> enemyPrefabs;
     [SerializeField] private List<Enemy> fairies;
@@ -34,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnSphereOnEdgeRandomly()
     {
 
-        Vector3 randomPos = Random.insideUnitSphere * spawnRadius;
+        Vector3 randomPos = UnityEngine.Random.insideUnitSphere * spawnRadius;
         randomPos += playerTarget.position;
         randomPos.y = 0.2f;
 
@@ -45,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         float dotProductAngle = Mathf.Acos(dotProduct / playerTarget.forward.magnitude * direction.magnitude);
 
         randomPos.x = Mathf.Cos(dotProductAngle) * spawnRadius + playerTarget.position.x;
-        randomPos.z = Mathf.Sin(dotProductAngle * (Random.value > 0.5f ? 1f : -1f)) * spawnRadius + playerTarget.position.z;
+        randomPos.z = Mathf.Sin(dotProductAngle * (UnityEngine.Random.value > 0.5f ? 1f : -1f)) * spawnRadius + playerTarget.position.z;
 
         if (Physics.Raycast(randomPos + new Vector3(0f,2f,0f), -Vector3.up, out RaycastHit hit) && hit.transform.tag == "Ground")
         {
@@ -53,6 +60,8 @@ public class EnemySpawner : MonoBehaviour
             enemiesOnScreen.Add(enemyObj.GetComponent<Enemy>());
             enemiesOnScreen[enemiesOnScreen.Count - 1].SetTarget(playerTarget);
             enemyObj.transform.position = randomPos;
+
+            OnSpawn?.Invoke(this, new OnSpawnArgs() { enemySpawned = enemyObj.GetComponent<Enemy>() });
         }
        
     }

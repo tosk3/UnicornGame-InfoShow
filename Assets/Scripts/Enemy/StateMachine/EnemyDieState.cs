@@ -23,7 +23,6 @@ public class EnemyDieState : EnemyBaseState
 
     public override void ExecuteState(Enemy enemy)
     {
-        //timer death
         enemy.Die();
     }
 

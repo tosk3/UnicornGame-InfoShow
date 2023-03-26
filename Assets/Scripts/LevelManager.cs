@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static EnemySpawner;
 
 public class LevelManager : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float levelTimerMax;
     [SerializeField] private float score;
 
+    //UI
+    [SerializeField] private FairyCounter fairyCounter;
+
 
 
     //level timer
@@ -30,8 +34,10 @@ public class LevelManager : MonoBehaviour
     {
         playerController.OnShoot += PlayerController_OnShoot;
         RegisterFairies();
+        spawner.OnSpawn += Spawner_OnSpawn;
         levelTimer = levelTimerMax;
     }
+
     private void Update()
     {
         if (RunLevelTimer())
@@ -62,11 +68,10 @@ public class LevelManager : MonoBehaviour
             fairy.OnEnemyDeath += Fairy_OnEnemyDeath;
         }
     }
-    public void RegisterEnemy(Enemy enemy)
+    private void Spawner_OnSpawn(object sender, OnSpawnArgs e)
     {
-        enemy.OnEnemyDeath += Enemy_OnEnemyDeath;
+        e.enemySpawned.OnEnemyDeath += Enemy_OnEnemyDeath;
     }
-
     private void Enemy_OnEnemyDeath(object sender, Enemy.OnDeathArgs e)
     {
         AudioClip clip = deathClips[UnityEngine.Random.Range(0, playerShootClips.Length)];
@@ -90,6 +95,7 @@ public class LevelManager : MonoBehaviour
         audioSource.transform.position = e.position;
         audioSource.PlayOneShot(clip);
         killedFairies++;
+        fairyCounter.SwapIcons();
         CheckForAllKilledFairies();
     }
 
@@ -124,5 +130,10 @@ public class LevelManager : MonoBehaviour
         textMesh.color = color;
         textMesh.GetComponent<MeshRenderer>().sortingOrder = sortingOrder;
         return textMesh;
+    }
+
+    public float TimerProgress()
+    {
+        return levelTimer / levelTimerMax;
     }
 }

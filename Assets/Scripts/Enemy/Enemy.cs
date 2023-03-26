@@ -114,9 +114,13 @@ public class Enemy : MonoBehaviour
     }
     public void Die()
     {
-        rb.isKinematic = false;
-        OnEnemyDeath?.Invoke(this, new OnDeathArgs() { position = this.transform.position });
-        StartCoroutine(Coroutine_Death());
+        if (rb.isKinematic)
+        {
+            rb.isKinematic = false;
+            OnEnemyDeath?.Invoke(this, new OnDeathArgs() { position = this.transform.position });
+            StartCoroutine(Coroutine_Death());
+        }
+      
     }
     private IEnumerator Coroutine_Death()
     {

@@ -146,7 +146,8 @@ MonoBehaviour:
   audioSource: {fileID: 8140630649018657750}
   playerShootClips:
   - {fileID: 8300000, guid: 97fdb158497d4974cb241e1d2ed44a62, type: 3}
-  enemyShootClips: []
+  enemyShootClips:
+  - {fileID: 8300000, guid: 48658d884b580204595814f04c5b7af4, type: 3}
   deathClips:
   - {fileID: 8300000, guid: b5c7a34addd443c42ac096c9529ae947, type: 3}
   - {fileID: 8300000, guid: 8d7b6173b14c0e74c9fdd7bde4b58443, type: 3}
