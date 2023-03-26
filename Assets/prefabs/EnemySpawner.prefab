@@ -48,8 +48,12 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 862644367959708918, guid: 4164561d2bc283b46ad5ce5be16dfd37, type: 3}
   - {fileID: 862644367959708918, guid: dbf5df7f4a335944aa750287b01f7b74, type: 3}
-  Fairies: []
+  fairies:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   enemiesOnScreen: []
   spawnTimer: 3
   maxSpawnTimer: 3
   spawnRadius: 30
+  play: 1

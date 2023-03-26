@@ -15,5 +15,5 @@ MonoBehaviour:
   transitions:
   - {fileID: 11400000, guid: 4ef19c5fe7976804a9508879e9c31caf, type: 2}
   - {fileID: 11400000, guid: 36c8c1826451c1c48bd5b74bef19a290, type: 2}
-  idleDistance: 30
+  idleDistance: 50
   defaultOutOfIdleState: 4

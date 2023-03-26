@@ -11,13 +11,15 @@ public class PlayerController : MonoBehaviour
     {
         public Vector3 position;
     }
-    public event EventHandler<OnDeathArgs> OnDeath;
+    public event EventHandler<OnDeathArgs> OnDamageTaken;
     public class OnDeathArgs : EventArgs
-    {       
+    {
+        public bool ded;
     }
 
     [SerializeField] private float speed;
     [SerializeField] private float health;
+    [SerializeField] private float healthMax;
     [SerializeField] private Ray cameraRay;               
     [SerializeField] private RaycastHit cameraRayHit; 
     [SerializeField] private Vector3 right;
@@ -34,39 +36,53 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool readyToSpeak= false;
     [SerializeField] private TextMesh textObj;
     [SerializeField] private Vector3 localOffset = new Vector3(-5f, 10f, 0);
+    [SerializeField] private bool play = true;
 
 
 
     private void Update()
     {
-        LookAtCamera();
-        Move();
-        if (RunTimer() || readyToShoot)
+        if (play)
         {
-            if (weapon.CheckInput(targetPosition))
+            LookAtCamera();
+            Move();
+            if (RunTimer() || readyToShoot)
             {
-                OnShoot?.Invoke(this, new OnShootEventArgs() { position = this.transform.position });
-                readyToShoot = false;
+                if (weapon.CheckInput(targetPosition))
+                {
+                    OnShoot?.Invoke(this, new OnShootEventArgs() { position = this.transform.position });
+                    readyToShoot = false;
+                }
+            }
+            if (RunSpeachTimer())
+            {
+                textObj = LevelManager.CreateWorldText(speachLines[UnityEngine.Random.Range(0, speachLines.Count)], this.transform.parent, localOffset, 12, Color.black);
+                readyToSpeak = false;
+            }
+            if (textObj != null)
+            {
+
+                textObj.transform.position = this.transform.position + localOffset;
+                textObj.transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
+                Camera.main.transform.rotation * Vector3.up);
+
+                if (RunBubbleTimer())
+                {
+                    Destroy(textObj);
+                    textObj = null;
+                }
             }
         }
-        if (RunSpeachTimer())
-        {
-            textObj = LevelManager.CreateWorldText(speachLines[UnityEngine.Random.Range(0, speachLines.Count)], this.transform.parent, localOffset, 12,Color.black);
-            readyToSpeak = false;
-        }
-        if (textObj != null)
-        {
+       
+    }
+    public float GetHealthPrecent()
+    {
+        return health / healthMax;
+    }
 
-            textObj.transform.position = this.transform.position + localOffset;
-            textObj.transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
-            Camera.main.transform.rotation * Vector3.up);
-
-            if (RunBubbleTimer())
-            {
-                Destroy(textObj);
-                textObj = null;
-            }
-        }
+    public void EndGame()
+    {
+        play = false;
     }
     private void LookAtCamera()
     {
@@ -93,10 +109,8 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float attackDamage)
     {
         health -=attackDamage;
-        if(health <= 0)
-        {
-            OnDeath?.Invoke(this, new OnDeathArgs() { });
-        }
+        OnDamageTaken?.Invoke(this, new OnDeathArgs() { ded = health < 0 ? true : false });
+
     }
     private bool RunTimer()
     {

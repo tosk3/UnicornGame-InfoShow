@@ -18,14 +18,32 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float spawnTimer;
     [SerializeField] private float maxSpawnTimer;
     [SerializeField] private float spawnRadius;
+    [SerializeField] private bool play = true;
 
 
     private void Update()
     {
-        if (RunTimer())
+        if (play)
         {
-            SpawnSphereOnEdgeRandomly();
+            if (RunTimer())
+            {
+                SpawnSphereOnEdgeRandomly();
+            }
+        }  
+    }
+    public void EndGame()
+    {
+        play = false;
+        foreach (Enemy enemy in enemiesOnScreen)
+        {
+            Destroy(enemy);           
         }
+        enemiesOnScreen.Clear();
+        foreach (Enemy enemy in fairies)
+        {
+            Destroy(enemy);   
+        }
+        fairies.Clear();
     }
     private bool RunTimer()
     {
@@ -77,5 +95,14 @@ public class EnemySpawner : MonoBehaviour
     public List<Enemy> GetFairies()
     {
         return fairies;
+    }
+    public void DecreaseSpawnTime(float amount)
+    {
+        maxSpawnTimer -= amount * 0.00001f;
+
+        if (maxSpawnTimer <= 0)
+        {
+            maxSpawnTimer = 0.1f;
+        }
     }
 }

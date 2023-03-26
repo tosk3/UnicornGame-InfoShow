@@ -361,15 +361,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8038d6efb96c1764dafeb37b42e7d1f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speachLines:
+  - eat shit !
+  - you brought this on yourselves!
+  - I hate you the most!
   speed: 4
-  health: 10
+  health: 20
+  healthMax: 20
   right: {x: 1, y: 0, z: -1}
   forward: {x: 1, y: 0, z: 1}
   targetPosition: {x: 0, y: 0, z: 0}
   weapon: {fileID: 7815722488811451342}
-  shootTimer: 2
-  shootTimerMax: 2
-  readyToShoot: 0
+  shootTimer: 0
+  speachTimer: 10
+  bubbleTimer: 5
+  shootTimerMax: 1
+  speachTimerMax: 10
+  bubbleTimerMax: 5
+  readyToShoot: 1
+  readyToSpeak: 0
+  textObj: {fileID: 0}
+  localOffset: {x: -5, y: 10, z: 0}
+  play: 1
 --- !u!1 &8851296080859903368
 GameObject:
   m_ObjectHideFlags: 0

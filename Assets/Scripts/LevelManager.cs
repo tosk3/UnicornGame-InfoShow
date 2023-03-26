@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static EnemySpawner;
 
@@ -17,9 +18,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private float levelTimer;
     [SerializeField] private float levelTimerMax;
     [SerializeField] private float score;
+    [SerializeField] private GameObject endScreen;
+    [SerializeField] private TextMeshProUGUI endScreen_text;
 
     //UI
     [SerializeField] private FairyCounter fairyCounter;
+    [SerializeField] private PlayerHealth_UI playerHealth_UI;
+    [SerializeField] private Window_QuestPointer fairyLocator;
+    [SerializeField] private UI_Pointer fairyLocator2;
 
 
 
@@ -30,12 +36,34 @@ public class LevelManager : MonoBehaviour
     //check fairy kills
     //play audio
 
+    public void GameOver()
+    {
+        endScreen.SetActive(true);
+        endScreen_text.text = "score : " + score.ToString();
+        playerController.EndGame();
+        spawner.EndGame();
+    }
+
+
     private void Start()
     {
         playerController.OnShoot += PlayerController_OnShoot;
+        playerController.OnDamageTaken += PlayerController_OnDeath;
         RegisterFairies();
+       // fairyLocator.Show(spawner.GetFairies()[(int)killedFairies].transform.position);
+        fairyLocator2.SetTarget(spawner.GetFairies()[(int)killedFairies].gameObject);
         spawner.OnSpawn += Spawner_OnSpawn;
         levelTimer = levelTimerMax;
+    }
+
+    private void PlayerController_OnDeath(object sender, PlayerController.OnDeathArgs e)
+    {
+        playerHealth_UI.UpdateHealth(playerController.GetHealthPrecent());
+        if ( e.ded)
+        {
+            score = killedFairies * 200 + killedEnemies * 20 + levelTimerMax * 50;
+            GameOver();
+        }
     }
 
     private void Update()
@@ -44,7 +72,9 @@ public class LevelManager : MonoBehaviour
         {
             //game Over score rampage over
             score = killedFairies * 200 + killedEnemies * 20 + levelTimerMax * 50;
+            GameOver();
         }
+
     }
 
     private void PlayerController_OnShoot(object sender, PlayerController.OnShootEventArgs e)
@@ -85,7 +115,7 @@ public class LevelManager : MonoBehaviour
         if (killedFairies >= spawner.GetFairies().Count)
         {
             score = killedFairies * 200 + killedEnemies * 20 + (levelTimer + levelTimerMax) * 50;
-            //game over you win !!!
+            GameOver();
         }
     }
 
@@ -95,6 +125,8 @@ public class LevelManager : MonoBehaviour
         audioSource.transform.position = e.position;
         audioSource.PlayOneShot(clip);
         killedFairies++;
+        //fairyLocator.Show(spawner.GetFairies()[(int)killedFairies].transform.position);
+        fairyLocator2.SetTarget(spawner.GetFairies()[(int)killedFairies].gameObject);
         fairyCounter.SwapIcons();
         CheckForAllKilledFairies();
     }
@@ -102,6 +134,8 @@ public class LevelManager : MonoBehaviour
     private bool RunLevelTimer()
     {
         levelTimer -= Time.deltaTime;
+        spawner.DecreaseSpawnTime(1-TimerProgress()*Time.deltaTime); // decreases linearly
+
         if (levelTimer <= 0)
         {
             return true;
