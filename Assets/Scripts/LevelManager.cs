@@ -134,7 +134,7 @@ public class LevelManager : MonoBehaviour
         audioSource.PlayOneShot(clip);
         killedFairies++;
         //fairyLocator.Show(spawner.GetFairies()[(int)killedFairies].transform.position);
-        if(killedFairies <= spawner.GetFairies().Count)
+        if(killedFairies < spawner.GetFairies().Count)
         {
             fairyLocator2.SetTarget(spawner.GetFairies()[(int)killedFairies].gameObject);
             fairyCounter.SwapIcons();
