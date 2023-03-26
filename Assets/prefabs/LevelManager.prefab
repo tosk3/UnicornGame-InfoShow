@@ -154,8 +154,8 @@ MonoBehaviour:
   reloadClip: {fileID: 8300000, guid: 07baff6bc46deff42bbcd9511176c8d5, type: 3}
   killedFairies: 0
   killedEnemies: 0
-  levelTimer: 150
-  levelTimerMax: 150
+  levelTimer: 100
+  levelTimerMax: 100
   score: 0
   endScreen: {fileID: 0}
   endScreen_text: {fileID: 0}

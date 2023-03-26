@@ -365,7 +365,7 @@ MonoBehaviour:
   - eat shit !
   - you brought this on yourselves!
   - I hate you the most!
-  speed: 8
+  speed: 7
   health: 20
   healthMax: 20
   right: {x: 1, y: 0, z: -1}
