@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TextMesh textObj;
     [SerializeField] private Vector3 localOffset = new Vector3(-5f, 10f, 0);
     [SerializeField] private bool play = true;
+    [SerializeField] private Animator animator;
 
 
 
