@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
             if (RunSpeachTimer())
             {
                 textObj = LevelManager.CreateWorldText(speachLines[UnityEngine.Random.Range(0, speachLines.Count)], this.transform.parent, localOffset, 12, Color.black);
+                textObj.fontStyle.Equals(FontStyle.Bold);
                 readyToSpeak = false;
             }
             if (textObj != null)
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
                 textObj.transform.position = this.transform.position + localOffset;
                 textObj.transform.LookAt(transform.position + Camera.main.transform.rotation * Vector3.forward,
                 Camera.main.transform.rotation * Vector3.up);
+
 
                 if (RunBubbleTimer())
                 {
@@ -110,8 +112,8 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float attackDamage)
     {
         health -=attackDamage;
-        OnDamageTaken?.Invoke(this, new OnDeathArgs() { ded = health < 0 ? true : false });
 
+        OnDamageTaken?.Invoke(this, new OnDeathArgs() { ded = health < 0 ? true : false });
     }
     private bool RunTimer()
     {
@@ -144,6 +146,13 @@ public class PlayerController : MonoBehaviour
         }
         return false;
 
+    }
+
+    private IEnumerator DeleteText(GameObject textObj)
+    {
+        yield return new WaitForSeconds(bubbleTimerMax);
+        Destroy(textObj);
+        textObj = null;
     }
     private bool RunBubbleTimer()
     {

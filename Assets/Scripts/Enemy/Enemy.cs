@@ -26,13 +26,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private EnemyBaseState currentState;
 
 
-    [SerializeField] private float shootTimer;
     [SerializeField] private float speachTimer;
     [SerializeField] private float bubbleTimer;
-    [SerializeField] private float shootTimerMax;
     [SerializeField] private float speachTimerMax;
     [SerializeField] private float bubbleTimerMax;
-    [SerializeField] private bool readyToShoot = false;
     [SerializeField] private bool readyToSpeak = false;
     [SerializeField] private TextMesh textObj;
     [SerializeField] private Vector3 localOffset = new Vector3(-5f, 10f, 0);
@@ -70,6 +67,7 @@ public class Enemy : MonoBehaviour
         if (RunSpeachTimer())
         {
             textObj = LevelManager.CreateWorldText(speachLines[UnityEngine.Random.Range(0, speachLines.Count)], this.transform.parent, localOffset, 12, Color.black);
+            textObj.fontStyle.Equals(FontStyle.Bold);
             readyToSpeak = false;
         }
         if (textObj != null)
@@ -194,6 +192,8 @@ public class Enemy : MonoBehaviour
     {
         if (rb.isKinematic)
         {
+            Destroy(textObj);
+            textObj = null;
             rb.isKinematic = false;
             OnEnemyDeath?.Invoke(this, new OnDeathArgs() { position = this.transform.position });
             StartCoroutine(Coroutine_Death());

@@ -57,6 +57,26 @@ MonoBehaviour:
   secondsToDie: 2
   gun: {fileID: 2848324021427891227}
   currentState: {fileID: 11400000, guid: b47d8251da38ae643b6d94538dd3526e, type: 2}
+  speachTimer: 10
+  bubbleTimer: 5
+  speachTimerMax: 10
+  bubbleTimerMax: 5
+  readyToSpeak: 0
+  textObj: {fileID: 0}
+  localOffset: {x: -5, y: 10, z: 0}
+  speachLines:
+  - Sparkles, please!
+  - Sparkles, be reasonable!
+  - we're trying to help you!
+  - this is for your own good, Sparkles!
+  - Sparkles, please I have a family!
+  - You were there for my wedding!
+  - eat shit, Sparkles!
+  - Shoot him, not me!
+  - Sparkles, we were like family!
+  - you're an abomination!
+  - I'm your uncle!
+  - Sparkles, I was like a father to you!
 --- !u!1 &4580805293195417870
 GameObject:
   m_ObjectHideFlags: 0
